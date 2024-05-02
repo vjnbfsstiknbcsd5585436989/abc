@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>艾力制作点名系统</title>
+    <style>
+        body {
+            background-color: #000;
+            color: lime;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size: 2em;
+            letter-spacing: 5px;
+            margin: 20px 0;
+        }
+
+        #result {
+            font-size: 2em;
+            background-color: #000;
+            color: lime;
+            padding: 10px;
+            border: 2px solid lime;
+            border-radius: 10px;
+            margin-top: 30px;
+            box-shadow: 0 0 10px lime;
+        }
+
+        #count {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: lime;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            margin: 20px auto;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #090;
+        }
+
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            #result {
+                font-size: 1.5em;
+            }
+            #count {
+                font-size: 1em;
+            }
+            button {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>幸运儿是</h1>
+    <p id="result"></p>
+    <p id="count"></p>
+    <button id="pickBtn" onclick="draw()">点名</button>
+
+    <script>
+        let numbers = [];
+        for (let i = 1; i <= 52; i++) {
+            numbers.push(`${i}号`);
+        }
+
+        let frequency = {};
+        let lastNumber = '';
+
+        function draw() {
+            let selectedNumber = numbers[Math.floor(Math.random() * numbers.length)];
+
+            lastNumber = selectedNumber;
+            frequency[selectedNumber] = (frequency[selectedNumber] || 0) + 1;
+
+            document.getElementById('result').textContent = selectedNumber;
+            document.getElementById('count').textContent = `被点名次数: ${frequency[selectedNumber]}`;
+        }
+
+        window.onresize = function() {
+            draw();
+        }
+    </script>
+</body>
+  </html>
